@@ -2,7 +2,7 @@ import './sass/main.scss';
 import galleryMarkupTpl from './templates/galleryMarkup.hbs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import ApiService from './js/serviceApi';
+import ApiService from './js/apiService';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 let page = 1;
