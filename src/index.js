@@ -23,17 +23,30 @@ refs.btnLoadMore.addEventListener('click', onLoadMore);
 window.addEventListener('scroll', onScroll);
 refs.btnToTheTop.addEventListener('click', onTopBtn);
 
+let searchQueryResult = '';
+
 async function onSearch(e) {
     e.preventDefault();
     clearImageMarkup();
     apiService.query = e.currentTarget.elements.searchQuery.value;
     apiService.resetPage(refs.btnLoadMore.classList.add('is-hidden'));
     const data = await apiService.fetchImages()
-    page = 2;
+    page = 1;
     const totalPages = Math.ceil(data.totalHits / 40);
-    if (data.totalHits === 0) {
-        alertNoImagesFound();
+    if (searchQueryResult != null && typeof searchQueryResult !== "undefined") {
+        searchQueryResult = searchQueryResult.trim();
+    }
+    if (!searchQueryResult) {
+        console.log("Пусто");
+    }
+    if (searchQueryResult === 0) {
+        return clearImageMarkup();
+        // refs.btnLoadMore.classList.remove('is-hidden');
+        // return alertNoImagesFound();
     };
+    // if (data.totalHits === 0 || '') {
+    //     alertNoImagesFound();
+    // };
     if (data.totalHits !== 0) {
         refs.btnLoadMore.classList.remove('is-hidden');
         alertImagesFound(data);
